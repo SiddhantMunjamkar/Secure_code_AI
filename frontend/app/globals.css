@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* SecureCode Theme */
+
+@theme {
+  --color-primary: #7f13ec;
+  --color-primary-glow: #9f4bf2;
+  --color-background-dark: #0f0a15;
+  --color-surface-dark: #1a1324;
+  --color-accent-cyan: #00f0ff;
+  --color-accent-red: #ff2a6d;
+  --color-accent-yellow: #ffc857;
+
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+/* Animations */
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse-glow {
+  0% {
+    opacity: 0.5;
+    box-shadow: 0 0 5px rgba(127, 19, 236, 0.2);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 25px rgba(127, 19, 236, 0.6);
+  }
+  100% {
+    opacity: 0.5;
+    box-shadow: 0 0 5px rgba(127, 19, 236, 0.2);
+  }
+}
+
+.animate-float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float 5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s infinite;
+}
+
+/* Code cards */
+
+.code-block {
+  backdrop-filter: blur(8px);
+  background: rgba(26, 19, 36, 0.7);
+}
+
+/* shadcn theme override */
+
+:root {
+  --radius: 0.75rem;
+
+  --background: #0f0a15;
+  --foreground: #ffffff;
+
+  --card: #1a1324;
+  --card-foreground: #ffffff;
+
+  --popover: #1a1324;
+  --popover-foreground: #ffffff;
+
+  --primary: #7f13ec;
+  --primary-foreground: #ffffff;
+
+  --secondary: #1a1324;
+  --secondary-foreground: #ffffff;
+
+  --muted: #1a1324;
+  --muted-foreground: #94a3b8;
+
+  --accent: #1a1324;
+  --accent-foreground: #ffffff;
+
+  --border: #2a2333;
+  --input: #2a2333;
+
+  --ring: #7f13ec;
+}
+
+/* Dark mode */
+
+.dark {
+  --background: #0f0a15;
+  --foreground: #ffffff;
+
+  --card: #1a1324;
+  --card-foreground: #ffffff;
+
+  --popover: #1a1324;
+  --popover-foreground: #ffffff;
+
+  --primary: #7f13ec;
+  --primary-foreground: #ffffff;
+
+  --secondary: #1a1324;
+  --secondary-foreground: #ffffff;
+
+  --muted: #1a1324;
+  --muted-foreground: #94a3b8;
+
+  --accent: #1a1324;
+  --accent-foreground: #ffffff;
+
+  --border: #2a2333;
+  --input: #2a2333;
+
+  --ring: #7f13ec;
+}
+
+/* Base styles */
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: "Space Grotesk", sans-serif;
+  }
+}
