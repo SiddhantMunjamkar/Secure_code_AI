@@ -169,7 +169,7 @@ export default function LeftSideForm({ onSubmit }: LeftSideFormProps) {
         <p className="text-center text-slate-500 text-sm">
           Don&apos;t have an account?{" "}
           <a
-            href="#"
+            href="/signup"
             className="text-[#00f0ff] hover:underline font-semibold ml-1"
           >
             Sign up
