@@ -3,6 +3,8 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     DATABASE_URL: str
+    SYNC_DATABASE_URL: str
+
     JWT_SECRET: str
 
     GITHUB_CLIENT_ID: str
