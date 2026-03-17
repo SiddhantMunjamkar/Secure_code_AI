@@ -16,8 +16,12 @@ from src.modules.auth.auth_schemas import (
 from src.modules.auth.auth_utils import create_token, verify_token
 from src.config.cookie import AUTH_COOKIE_NAME, AUTH_COOKIE_OPTIONS
 
-# Password hashing
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Password hashing context with bcrypt
+pwd_context = CryptContext(
+    schemes=["bcrypt_sha256"],
+    deprecated="auto",
+    bcrypt_sha256__rounds=12  # production-grade cost factor
+)
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -42,7 +46,7 @@ async def signup(
         stmt = select(User).where(User.email == body.email)
         result = await db.execute(stmt)
         existing_user = result.scalars().first()
-        
+
         if existing_user:
             raise HTTPException(status_code=400, detail="User already exists")
 
@@ -54,7 +58,7 @@ async def signup(
             name=body.name,
             is_active=True,
         )
-        
+
         db.add(new_user)
         await db.commit()
         await db.refresh(new_user)
@@ -95,13 +99,15 @@ async def login(
         stmt = select(User).where(User.email == body.email)
         result = await db.execute(stmt)
         user = result.scalars().first()
-        
+
         if not user:
-            raise HTTPException(status_code=401, detail="Invalid email or password")
+            raise HTTPException(
+                status_code=401, detail="Invalid email or password")
 
         # Verify password
         if not verify_password(body.password, user.password_hash):
-            raise HTTPException(status_code=401, detail="Invalid email or password")
+            raise HTTPException(
+                status_code=401, detail="Invalid email or password")
 
         # Create JWT token
         token = create_token(str(user.id))
@@ -140,7 +146,7 @@ async def me(
         # Verify token and get user_id
         payload = verify_token(access_token)
         user_id = payload.get("sub")
-        
+
         if not user_id:
             raise HTTPException(status_code=401, detail="Invalid token")
 
@@ -148,7 +154,7 @@ async def me(
         stmt = select(User).where(User.id == user_id)
         result = await db.execute(stmt)
         user = result.scalars().first()
-        
+
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
 
