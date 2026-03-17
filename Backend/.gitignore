@@ -39,3 +39,13 @@ wheels/
 # OS
 .DS_Store
 Thumbs.db
+
+# Alembic
+migrations/__pycache__/
+
+# Local database
+*.db
+*.sqlite
+
+# Logs
+*.log
