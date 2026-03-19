@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException, Response, Cookie
+from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from passlib.context import CryptContext
+
 import uuid
 
 from src.database.connection import get_db
@@ -13,25 +13,12 @@ from src.modules.auth.auth_schemas import (
     LoginResponse,
     UserResponse,
 )
-from src.modules.auth.auth_utils import create_token, verify_token
+from src.modules.auth.auth_utils import create_token, hash_password, verify_password
+from src.middleware.requireAuth import require_auth
 from src.config.cookie import AUTH_COOKIE_NAME, AUTH_COOKIE_OPTIONS
 
-# Password hashing context with bcrypt
-pwd_context = CryptContext(
-    schemes=["bcrypt_sha256"],
-    deprecated="auto",
-    bcrypt_sha256__rounds=12  # production-grade cost factor
-)
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
-
-
-def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
-
-
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
 
 
 @router.post("/signup", response_model=SignupResponse, status_code=201)
@@ -135,43 +122,10 @@ async def login(
 
 @router.get("/me", response_model=UserResponse)
 async def me(
-    access_token: str | None = Cookie(None),
-    db: AsyncSession = Depends(get_db),
+    current_user: dict = Depends(require_auth),
 ):
-    """Get current user"""
-    try:
-        if not access_token:
-            raise HTTPException(status_code=401, detail="Not authenticated")
-
-        # Verify token and get user_id
-        payload = verify_token(access_token)
-        user_id = payload.get("sub")
-
-        if not user_id:
-            raise HTTPException(status_code=401, detail="Invalid token")
-
-        # Get user
-        stmt = select(User).where(User.id == user_id)
-        result = await db.execute(stmt)
-        user = result.scalars().first()
-
-        if not user:
-            raise HTTPException(status_code=404, detail="User not found")
-
-        return UserResponse(
-            id=user.id,
-            email=user.email,
-            name=user.name,
-            avatar_url=user.avatar_url,
-            is_active=user.is_active,
-            last_login=user.last_login,
-            created_at=user.created_at,
-            updated_at=user.updated_at,
-        )
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    """Get current authenticated user"""
+    return UserResponse(**current_user)
 
 
 @router.post("/logout")

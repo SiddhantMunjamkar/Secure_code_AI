@@ -2,6 +2,7 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from src.config.setting import settings
 import logging
+from passlib.context import CryptContext
 
 logger = logging.getLogger(__name__)
 
@@ -33,3 +34,19 @@ def verify_token(token: str):
     except Exception as e:
         logger.error(f"Unexpected error verifying token: {str(e)}")
         raise
+
+
+# Password hashing context with bcrypt
+pwd_context = CryptContext(
+    schemes=["bcrypt_sha256"],
+    deprecated="auto",
+    bcrypt_sha256__rounds=12  # production-grade cost factor
+)
+
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)

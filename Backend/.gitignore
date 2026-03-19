@@ -49,3 +49,18 @@ migrations/__pycache__/
 
 # Logs
 *.log
+
+# System/Shell files
+.shell
+.bash_history
+.bash_profile
+.bash_profile.backup
+.bash_profile.swp
+.condarc
+.asyncpg-analytics
+*.cson
+init.coffee
+
+# User-specific files
+atlantis.db
+config.json
