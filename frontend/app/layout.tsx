@@ -1,5 +1,6 @@
 import "./globals.css"
 import type { Metadata } from "next"
+import { AuthProvider } from "@/components/providers/AuthProvider"
 
 export const metadata: Metadata = {
   title: "SecureCode AI",
@@ -31,7 +32,7 @@ export default function RootLayout({
       </head>
 
       <body className="font-display bg-background text-foreground" suppressHydrationWarning>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   )

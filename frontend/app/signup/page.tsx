@@ -1,12 +1,23 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import AnimateRingLeftSide from "@/components/Sign_Up_comps/animate_ring_leftside";
 import SignUpForm from "@/components/Sign_Up_comps/sign_up_form";
+import { useAuth } from "@/components/providers/AuthProvider";
+import { signUpWithEmail } from "@/lib/auth";
 
 export default function LoginPage() {
-  const handleSignIn = async (values: { email: string; password: string }) => {
-    // TODO: call your auth API here
-    console.log("Sign in:", values);
+  const router = useRouter();
+  const { refreshUser } = useAuth();
+
+  const handleSignUp = async (values: {
+    Name: string;
+    email: string;
+    password: string;
+  }) => {
+    await signUpWithEmail(values);
+    await refreshUser();
+    router.push("/dashboard");
   };
 
   return (
@@ -15,7 +26,7 @@ export default function LoginPage() {
       <AnimateRingLeftSide />
 
       {/* RIGHT SIDE 40% */}
-      <SignUpForm onSubmit={handleSignIn} />
+      <SignUpForm onSubmit={handleSignUp} />
     </div>
   );
 }

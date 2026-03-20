@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getGithubOAuthStartUrl } from "@/lib/auth";
 
 const signInSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -31,6 +32,10 @@ export default function LeftSideForm({ onSubmit }: LeftSideFormProps) {
 
   const onFormSubmit = async (values: SignInFormValues) => {
     await onSubmit?.(values);
+  };
+
+  const handleGithubSignIn = () => {
+    window.location.assign(getGithubOAuthStartUrl());
   };
 
   return (
@@ -61,6 +66,8 @@ export default function LeftSideForm({ onSubmit }: LeftSideFormProps) {
 
         {/* GitHub */}
         <button
+          type="button"
+          onClick={handleGithubSignIn}
           className="w-full flex items-center justify-center gap-3 bg-white text-black hover:bg-slate-100 transition-colors rounded-lg font-semibold text-sm cursor-pointer"
           style={{ height: 48 }}
         >

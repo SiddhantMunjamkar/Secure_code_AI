@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getGithubOAuthStartUrl } from "@/lib/auth";
 
 const signUpSchema = z.object({
   Name: z.string().min(2, "Please enter your full name"),
@@ -65,6 +66,10 @@ export default function SignUpForm({ onSubmit }: SignUpFormProps) {
     return "text-green-600";
   };
 
+  const handleGithubSignUp = () => {
+    window.location.assign(getGithubOAuthStartUrl());
+  };
+
   return (
     <div className="w-full lg:w-2/5 h-full bg-[#0f0a15] flex flex-col justify-center items-center ">
       <div className="w-full max-w-[380px] mx-auto flex flex-col gap-5 px-6 py-8">
@@ -77,7 +82,11 @@ export default function SignUpForm({ onSubmit }: SignUpFormProps) {
         </div>
 
         {/* GitHub Button */}
-        <button className="w-full flex items-center justify-center gap-3 rounded-lg bg-[#2a3f3a] px-4 py-3 text-white transition-all hover:bg-[#354a48] font-semibold text-sm">
+        <button
+          type="button"
+          onClick={handleGithubSignUp}
+          className="w-full flex items-center justify-center gap-3 rounded-lg bg-[#2a3f3a] px-4 py-3 text-white transition-all hover:bg-[#354a48] font-semibold text-sm"
+        >
           <svg
             aria-hidden="true"
             className="h-5 w-5 fill-white"
