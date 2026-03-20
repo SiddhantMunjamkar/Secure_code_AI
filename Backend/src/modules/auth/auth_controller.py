@@ -168,7 +168,22 @@ async def github_callback(request: Request, db: AsyncSession = Depends(get_db), 
         name = user_data.get("name")
 
         if not email:
-            raise HTTPException(status_code=400, detail="GitHub account has no public email")
+            emails_resp = await oauth.github.get("user/emails", token=token)
+            if emails_resp.status_code == 200:
+                emails = emails_resp.json()
+                primary_verified = next(
+                    (
+                        e.get("email")
+                        for e in emails
+                        if e.get("primary") is True and e.get("verified") is True
+                    ),
+                    None,
+                )
+                if primary_verified:
+                    email = primary_verified
+
+        if not email:
+            raise HTTPException(status_code=400, detail="GitHub account has no usable email")
 
         # Check if user exists
         stmt = select(User).where(User.email == email)
