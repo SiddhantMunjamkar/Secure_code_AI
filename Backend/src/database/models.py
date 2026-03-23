@@ -125,6 +125,7 @@ class PullRequest(Base):
     analyzed_at = Column(DateTime, nullable=True)
     created_at  = Column(DateTime, server_default=func.now())
 
+
     # relationships
     repository = relationship("Repository", back_populates="pull_requests")
 
