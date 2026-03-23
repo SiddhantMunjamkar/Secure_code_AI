@@ -9,6 +9,7 @@ engine = create_async_engine(
     connect_args={"statement_cache_size": 0},
 )
 
+
 AsyncSessionLocal = sessionmaker(
     bind=engine,
     class_=AsyncSession,
