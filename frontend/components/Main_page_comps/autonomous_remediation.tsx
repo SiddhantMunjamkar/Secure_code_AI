@@ -9,6 +9,8 @@ export default function AutonomousRemediation() {
 		<section className="max-w-[1400px] mx-auto px-6 mt-40">
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-slate-900/50 dark:bg-[#12121a]/50 border border-[#1f1f2e] p-8 md:p-12 rounded-3xl">
 				{/* Left Column */}
+
+				
 				<div>
 					<h2 className="text-3xl font-bold mb-6 text-white">Autonomous Remediation</h2>
 					<p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
