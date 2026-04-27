@@ -5,6 +5,7 @@ export default function AutonomousRemediation() {
 		"Security context provided for every fix"
 	];
 
+	
 	return (
 		<section className="max-w-[1400px] mx-auto px-6 mt-40">
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-slate-900/50 dark:bg-[#12121a]/50 border border-[#1f1f2e] p-8 md:p-12 rounded-3xl">
