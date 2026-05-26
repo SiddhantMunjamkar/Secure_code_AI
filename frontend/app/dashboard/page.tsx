@@ -59,12 +59,18 @@ export default function DashboardPage() {
                   Your security dashboard is ready
                 </h1>
                 <p className="text-slate-400 text-base sm:text-lg font-normal leading-relaxed">
-                  Connect your first GitHub repository to start scanning pull requests automatically and see real-time insights.
+                  Connect your first GitHub repository to start scanning pull
+                  requests automatically and see real-time insights.
                 </p>
               </div>
 
-              <button className="group flex min-w-[200px] cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-lg h-12 px-6 bg-[#7c3bed] hover:bg-[#6f32da] text-white shadow-lg shadow-[#7c3bed]/25 transition-all transform hover:-translate-y-0.5">
-                <span className="material-symbols-outlined text-[20px]">add_link</span>
+              <button
+                onClick={() => router.push("/onboarding/connect-github")}
+                className="group flex min-w-[200px] cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-lg h-12 px-6 bg-[#7c3bed] hover:bg-[#6f32da] text-white shadow-lg shadow-[#7c3bed]/25 transition-all transform hover:-translate-y-0.5"
+              >
+                <span className="material-symbols-outlined text-[20px]">
+                  add_link
+                </span>
                 <span className="text-sm font-bold leading-normal tracking-[0.015em]">
                   Connect GitHub Repository
                 </span>
@@ -73,9 +79,12 @@ export default function DashboardPage() {
 
             <div className="flex flex-col gap-8 w-full">
               <div className="flex flex-col gap-2 items-center text-center">
-                <h3 className="text-slate-200 text-lg font-bold">What you'll see here</h3>
+                <h3 className="text-slate-200 text-lg font-bold">
+                  What you'll see here
+                </h3>
                 <p className="text-slate-400 text-sm">
-                  Once connected, this dashboard will populate with these insights.
+                  Once connected, this dashboard will populate with these
+                  insights.
                 </p>
               </div>
 
@@ -83,7 +92,9 @@ export default function DashboardPage() {
                 <div className="group flex flex-col gap-4 p-4 rounded-xl border border-[#2e2839] bg-[#131118]/40 hover:bg-[#131118] transition-all duration-300">
                   <div className="w-full aspect-video rounded-lg overflow-hidden bg-[#0a0a0f]/50 border border-white/5 relative">
                     <div className="absolute inset-0 flex items-center justify-center opacity-40 group-hover:opacity-60 transition-opacity">
-                      <span className="material-symbols-outlined text-4xl text-slate-500">terminal</span>
+                      <span className="material-symbols-outlined text-4xl text-slate-500">
+                        terminal
+                      </span>
                     </div>
                     <div
                       className="w-full h-full bg-cover bg-center opacity-30 grayscale group-hover:grayscale-0 transition-all duration-500"
@@ -95,8 +106,12 @@ export default function DashboardPage() {
                   </div>
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[#7c3bed] text-sm">radar</span>
-                      <p className="text-slate-200 text-sm font-bold leading-normal">PR Scans</p>
+                      <span className="material-symbols-outlined text-[#7c3bed] text-sm">
+                        radar
+                      </span>
+                      <p className="text-slate-200 text-sm font-bold leading-normal">
+                        PR Scans
+                      </p>
                     </div>
                     <p className="text-slate-400 text-xs font-normal leading-normal">
                       Automated security checks on every pull request.
@@ -121,8 +136,12 @@ export default function DashboardPage() {
                   </div>
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[#7c3bed] text-sm">psychology</span>
-                      <p className="text-slate-200 text-sm font-bold leading-normal">AI Remediation</p>
+                      <span className="material-symbols-outlined text-[#7c3bed] text-sm">
+                        psychology
+                      </span>
+                      <p className="text-slate-200 text-sm font-bold leading-normal">
+                        AI Remediation
+                      </p>
                     </div>
                     <p className="text-slate-400 text-xs font-normal leading-normal">
                       AI-suggested fixes for vulnerabilities found.
@@ -133,7 +152,9 @@ export default function DashboardPage() {
                 <div className="group flex flex-col gap-4 p-4 rounded-xl border border-[#2e2839] bg-[#131118]/40 hover:bg-[#131118] transition-all duration-300">
                   <div className="w-full aspect-video rounded-lg overflow-hidden bg-[#0a0a0f]/50 border border-white/5 relative">
                     <div className="absolute inset-0 flex items-center justify-center opacity-40 group-hover:opacity-60 transition-opacity">
-                      <span className="material-symbols-outlined text-4xl text-slate-500">ssid_chart</span>
+                      <span className="material-symbols-outlined text-4xl text-slate-500">
+                        ssid_chart
+                      </span>
                     </div>
                     <div
                       className="w-full h-full bg-cover bg-center opacity-30 grayscale group-hover:grayscale-0 transition-all duration-500"
@@ -148,7 +169,9 @@ export default function DashboardPage() {
                       <span className="material-symbols-outlined text-[#7c3bed] text-sm">
                         trending_up
                       </span>
-                      <p className="text-slate-200 text-sm font-bold leading-normal">Security Trends</p>
+                      <p className="text-slate-200 text-sm font-bold leading-normal">
+                        Security Trends
+                      </p>
                     </div>
                     <p className="text-slate-400 text-xs font-normal leading-normal">
                       Track your security posture over time.
