@@ -38,7 +38,8 @@ export default function PricingPage() {
 				"Dedicated account manager"
 			],
 			button: "Contact Sales",
-			isPopular: false
+			isPopular: false,
+			isEnterprise: true
 		}
 	];
 
@@ -55,10 +56,12 @@ export default function PricingPage() {
 				{plans.map((plan, index) => (
 					<div
 						key={index}
-						className={`p-8  rounded-3xl flex flex-col relative ${
+						className={`p-8 rounded-3xl flex flex-col relative transition-all duration-300 ${
 							plan.isPopular
 								? "bg-slate-100 dark:bg-[#12121a] border-2 border-[#7c3bed] shadow-xl shadow-[#7c3bed]/20"
-								: "bg-slate-100 dark:bg-[#12121a] border border-slate-200 dark:border-[#1f1f2e]"
+								: plan.isEnterprise
+									? "bg-white dark:bg-[#1a1a2e] border border-[#7c3bed]/30 shadow-lg shadow-[#7c3bed]/5 hover:border-[#7c3bed]/60"
+									: "bg-slate-100 dark:bg-[#12121a] border border-slate-200 dark:border-[#1f1f2e]"
 						}`}
 					>
 						{/* Most Popular Badge */}
@@ -92,7 +95,7 @@ export default function PricingPage() {
 
 						{/* Button */}
 						<Button
-							variant={plan.isPopular ? "Pricing_Popular" : "Pricing_Outline"}
+							variant={plan.isPopular ? "Pricing_Popular" : plan.isEnterprise ? "Pricing_Popular" : "Pricing_Outline"}
 							size="pricing"
 						>
 							{plan.button}
