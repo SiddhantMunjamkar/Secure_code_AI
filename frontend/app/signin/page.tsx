@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRouter } from "next/navigation";
 import AnimateRingLeftSide from "@/components/Sign_In_comps/animate_ring_leftside";
@@ -16,6 +16,7 @@ export default function LoginPage() {
     router.push("/dashboard");
   };
 
+  
   return (
     <div className="w-full h-screen flex flex-col lg:flex-row bg-[#0f0a15] text-white overflow-y-auto">
       {/* LEFT SIDE 60% */}
